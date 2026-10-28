@@ -38,4 +38,22 @@ enum ColorFamily: String, Codable, CaseIterable, Identifiable {
     func complements(_ other: ColorFamily) -> Bool {
         Self.complements.contains([self, other])
     }
+
+    /// Neighbouring shades that read as "the same colour" from a distance,
+    /// so navy chinos can stand in for black ones.
+    private static let similar: [Set<ColorFamily>] = [
+        [.black, .gray, .navy],
+        [.white, .beige],
+        [.beige, .brown],
+        [.blue, .navy],
+        [.red, .pink],
+        [.red, .orange],
+        [.orange, .yellow],
+        [.pink, .purple],
+        [.blue, .purple],
+    ]
+
+    func isSimilar(to other: ColorFamily) -> Bool {
+        Self.similar.contains { $0.contains(self) && $0.contains(other) }
+    }
 }

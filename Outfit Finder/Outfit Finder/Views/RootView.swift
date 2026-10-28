@@ -6,8 +6,11 @@ struct RootView: View {
             Tab("Closet", systemImage: "square.grid.2x2") {
                 ClosetView()
             }
+            Tab("Inspiration", systemImage: "photo.stack") {
+                InspirationView()
+            }
             Tab("Ideas", systemImage: "sparkles") {
-                IdeasView()
+                SuggestionsView()
             }
             Tab("Outfits", systemImage: "hanger") {
                 OutfitsView()

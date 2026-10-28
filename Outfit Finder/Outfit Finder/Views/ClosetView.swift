@@ -79,7 +79,7 @@ private struct ItemCell: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             ItemImage(item: item)
-                .aspectRatio(1, contentMode: .fill)
+                .aspectRatio(1, contentMode: .fit)
 
             Text(item.name)
                 .font(.subheadline)
