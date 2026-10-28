@@ -2,7 +2,6 @@ import SwiftUI
 import SwiftData
 
 /// Outfit ideas generated from the closet, each savable as a real outfit.
-/// Shown inside `IdeasView`, which supplies the navigation stack.
 struct SuggestionsView: View {
     @Environment(\.modelContext) private var context
     @Query private var closet: [ClothingItem]
@@ -14,21 +13,26 @@ struct SuggestionsView: View {
     }
 
     var body: some View {
-        if suggestions.isEmpty {
-            ContentUnavailableView(
-                "No ideas yet",
-                systemImage: "sparkles",
-                description: Text("Add at least one top and one bottom, or a dress, and tag their colours.")
-            )
-        } else {
-            List(suggestions) { suggestion in
-                SuggestionRow(
-                    suggestion: suggestion,
-                    isSaved: savedIDs.contains(suggestion.id)
-                ) {
-                    save(suggestion)
+        NavigationStack {
+            Group {
+                if suggestions.isEmpty {
+                    ContentUnavailableView(
+                        "No ideas yet",
+                        systemImage: "sparkles",
+                        description: Text("Add at least one top and one bottom, or a dress, and tag their colours.")
+                    )
+                } else {
+                    List(suggestions) { suggestion in
+                        SuggestionRow(
+                            suggestion: suggestion,
+                            isSaved: savedIDs.contains(suggestion.id)
+                        ) {
+                            save(suggestion)
+                        }
+                    }
                 }
             }
+            .navigationTitle("Ideas")
         }
     }
 
